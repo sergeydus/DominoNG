@@ -50,7 +50,7 @@
               "sourceMap": true
             },
             "gh-pages": {
-              "baseHref": "/dominoNG/",
+              "baseHref": "/DominoNG/",
               "outputPath": "dist/DominoNG/browser",
               "budgets": [
                 {
