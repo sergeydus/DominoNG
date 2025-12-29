@@ -18,7 +18,7 @@ export class VerticalNumbers {
     levelService = inject(LevelService)
     currentBoard = input.required<CurrentBoardService>()
     size = computed(() => this.currentBoard().squareSize)
-    split = computed(() => this.currentBoard().currentBoard().boardVerticalNumbers.split(''))
+    split = computed(() => this.currentBoard().currentBoard().boardVerticalNumbers.split(','))
     correctIndexes = computed(() => this.currentBoard().correctVerticalValues)
     getColor(index: number, el: string) {
         let color = '#ababab'

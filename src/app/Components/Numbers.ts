@@ -16,7 +16,7 @@ export class Numbers {
     levelService = inject(LevelService)
     currentBoard = input.required<CurrentBoardService>()
     size = computed(() => this.currentBoard().squareSize)
-    split = computed(() => this.currentBoard().currentBoard().boardHorizontalNumbers.split(''))
+    split = computed(() => this.currentBoard().currentBoard().boardHorizontalNumbers.split(','))
     correctIndexes = computed(() => this.currentBoard().correctHorizontalValues)
     index = input.required<number>()
     value = input.required<string>()

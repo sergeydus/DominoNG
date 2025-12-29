@@ -159,7 +159,7 @@ export class CurrentBoardService {
         this.currentBoard.set({ ...this.currentBoard() })
     }
     completed = computed(() => {
-        return this.currentBoard() && this.correctHorizontalValues?.join('') == this.currentBoard().boardHorizontalNumbers
-            && this.correctVerticalValues?.join('') == this.currentBoard().boardVerticalNumbers
+        return this.currentBoard() && this.correctHorizontalValues?.join(',') == this.currentBoard().boardHorizontalNumbers
+            && this.correctVerticalValues?.join(',') == this.currentBoard().boardVerticalNumbers
     })
 }

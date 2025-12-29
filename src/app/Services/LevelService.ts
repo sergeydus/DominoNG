@@ -13,7 +13,7 @@ export class LevelService {
     level = signal<1 | 2 | 3>(1)
     selectedPiece = signal<1 | 2>(1)
     difficulty$ = toObservable(this.difficulty)
-    tutorial: DominoLevel = { board: [[null, null], [null, null]], boardHorizontalNumbers: '11', boardVerticalNumbers: '20', completed: false }
+    tutorial: DominoLevel = { board: [[null, null], [null, null]], boardHorizontalNumbers: '1,1', boardVerticalNumbers: '2,0', completed: false }
     easyBoards: DominoLevel[] | null = null
     mediumBoards: DominoLevel[] | null = null
     hardBoards: DominoLevel[] | null = null

@@ -18,7 +18,7 @@ export class Hover {
     levelService = inject(LevelService)
     currentBoard = input.required<CurrentBoardService>()
     size = computed(() => this.currentBoard().squareSize)
-    split = computed(() => this.currentBoard().currentBoard().boardVerticalNumbers.split(''))
+    split = computed(() => this.currentBoard().currentBoard().boardVerticalNumbers.split(','))
     highlightedSquares = computed(() => {
         const highlightedSquares = this.currentBoard().highlightedSquares2()
         if (!highlightedSquares) {

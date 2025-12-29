@@ -43,5 +43,5 @@ export class Tutorial {
     }
     levelService = inject(LevelService)
     sizeStore = inject(SizeService)
-    tutorialBoard = signal(new CurrentBoardService(this.sizeStore, this.levelService, { board: [[null, null], [null, null]], boardHorizontalNumbers: '11', boardVerticalNumbers: '20', completed: false }))
+    tutorialBoard = signal(new CurrentBoardService(this.sizeStore, this.levelService, { board: [[null, null], [null, null]], boardHorizontalNumbers: '1,1', boardVerticalNumbers: '2,0', completed: false }))
 }
