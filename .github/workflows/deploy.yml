@@ -35,13 +35,18 @@ jobs:
       - name: Build
         run: npm run build:gh-pages
 
+      - name: Verify build output
+        run: |
+          ls -la dist/DominoNG/browser/browser/ || echo "Path not found, checking structure..."
+          find dist -name "index.html" -type f
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/DominoNG/browser'
+          path: 'dist/DominoNG/browser/browser'
 
   deploy:
     environment:
