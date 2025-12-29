@@ -19,7 +19,7 @@ import { Pieces } from "./Pieces";
             <div class="border-[#666666] border-4 rounded-2xl relative">
                 <hover [currentBoard]="currentBoard()"></hover>
                 <pieces [currentBoard]="currentBoard()"></pieces>
-                <div (mousemove)="onMouseMove($event)" (click)="onClick($event)" [attr.draggable]="false" [ngStyle]="{display:'grid','grid-template-columns':gridColumns()}">
+                <div (mousemove)="onMouseMove($event)" (mouseleave)="onMouseMoveEnd($event)" (click)="onClick($event)" [attr.draggable]="false" [ngStyle]="{display:'grid','grid-template-columns':gridColumns()}">
                     @for(item of currentBoard().currentBoard().board.flat(); track $index) {
                         @let i = calcI($index);
                         @let j = $index % boardSize();
@@ -56,6 +56,10 @@ export class ClientBoard {
         const x = event.clientX - rect.left; //x position within the element.
         const y = event.clientY - rect.top;  //y position within the element.
         this.sizeService.setHoverCords([x, y])
+    }
+    onMouseMoveEnd = (event: MouseEvent) => {
+        this.sizeService.setHoverCords(null)
+
     }
     onClick = (event: MouseEvent) => {
         const audio = new Audio('snap.mp3');

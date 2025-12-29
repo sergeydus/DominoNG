@@ -3,12 +3,16 @@ import { DominoLevel } from "../types"
 import { CurrentBoardService } from "./CurrentBoardService"
 import { BoardsResponse } from "../types"
 import { SizeService } from "./SizeService"
+import { toObservable } from "@angular/core/rxjs-interop"
+import { map, scan } from "rxjs"
+import previousValueMap from "../Pipes/previousValueMap"
 @Injectable({ providedIn: 'root' })
 export class LevelService {
     sizeStore = inject(SizeService)
     difficulty = signal<'easy' | 'normal' | 'hard'>('easy')
     level = signal<1 | 2 | 3>(1)
     selectedPiece = signal<1 | 2>(1)
+    difficulty$ = toObservable(this.difficulty)
     tutorial: DominoLevel = { board: [[null, null], [null, null]], boardHorizontalNumbers: '11', boardVerticalNumbers: '20', completed: false }
     easyBoards: DominoLevel[] | null = null
     mediumBoards: DominoLevel[] | null = null
@@ -26,6 +30,34 @@ export class LevelService {
         if (typeof localStorage !== 'undefined') {
             this.hasSeenTutorial = localStorage.getItem('hasSeenTutorial') === 'true'
         }
+        this.difficulty$.pipe(map(previousValueMap())).subscribe((el) => {
+            const newDifficulty = el.current
+            let boards: DominoLevel[] | null = null
+            switch (newDifficulty) {
+                case 'easy':
+                    boards = this.easyBoards
+                    break;
+                case 'normal':
+                    boards = this.mediumBoards
+                    break;
+                case 'hard':
+                    boards = this.hardBoards
+                    break;
+
+                default:
+                    boards = this.easyBoards
+                    break;
+            }
+            if (!boards) {
+                return
+            }
+            const index = boards.findIndex(el => !el.completed)
+            if (index != -1) {
+                this.setLevel((index + 1) as 1 | 2 | 3)
+            } else {
+                this.setLevel(3)
+            }
+        })
     }
     setBoards(boards: BoardsResponse) {
         this.easyBoards = boards.easyBoards
@@ -53,7 +85,6 @@ export class LevelService {
             default: board = this.easyBoards[this.level() - 1];
         }
         return new CurrentBoardService(this.sizeStore, this, board)
-        // return board
     }
     get correctHorizontalValues() {
         return this.currentBoard?.correctHorizontalValues
