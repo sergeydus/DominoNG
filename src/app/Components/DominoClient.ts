@@ -6,8 +6,6 @@ import dominoBoardsData from '../dominoBoards.json';
 import { DifficultySlider } from "./DifficultySlider";
 import { LevelSelector } from "./LevelSelector";
 import { DominoPieces } from "./DominoPieces";
-import { TwMergeDirective } from "../Directives/Highlight";
-import { NgClass } from '@angular/common';
 import { ClientBoard } from "./ClientBoard";
 import { Tutorial } from "./Tutorial";
 @Component({
@@ -19,28 +17,17 @@ import { Tutorial } from "./Tutorial";
   }@else {
 
     <div class="flex flex-col min-h-screen items-center justify-center bg-[#e8e7e7] font-sans">
-      <!-- <DominoClient /> -->
       <div (contextmenu)="onRightClick($event)" class="flex flex-col gap-4 items-center justify-center">
         <difficulty-slider></difficulty-slider>
         <client-board [currentBoard]="currentboardz"></client-board>
         <domino-pieces [currentBoard]="currentboardz"></domino-pieces>
         <level-selector></level-selector>
-        {{sizeService.boardSize()}}
-        <div twMerge [ngClass]="{'border-2':true, 'bg-pink-500':true}" class="bg-red-500">
-          difficulty:{{levelService.difficulty()}}
-        </div>
         <tutorial></tutorial>
-        selectedPiece:{{levelService.selectedPiece()}}
-        level:{{levelService.level()}}
-        pieceSize z:{{currentboard()?.squareSize}}
-        hover loc:{{sizeService.hoverCords()}}
-        highligted squares:{{currentboard()?.highlightedSquares2()}}
-        yellow!!!!
       </div>
     </div >
   }
     `,
-  imports: [DifficultySlider, LevelSelector, DominoPieces, TwMergeDirective, NgClass, ClientBoard, Tutorial],
+  imports: [DifficultySlider, LevelSelector, DominoPieces, ClientBoard, Tutorial],
 })
 export class DominoClient implements OnInit {
   sizeService = inject(SizeService)

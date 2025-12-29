@@ -12,8 +12,6 @@ import {DominoClient} from './Components/DominoClient'
   // styleUrl: './app.css'
   template: `
   <div class="flex flex-col min-h-screen items-center justify-center bg-[#e8e7e7] font-sans">
-      <!-- <DominoClient /> -->
-       {{sizeService.boardSize()}}
        <domino-client></domino-client>
     </div >
   `,
